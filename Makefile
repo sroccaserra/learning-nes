@@ -1,11 +1,11 @@
 build: helloworld.nes
 
-helloworld.o: helloworld.asm
-	ca65 helloworld.asm
+src/helloworld.o: src/helloworld.asm
+	ca65 src/helloworld.asm
 
-helloworld.nes: helloworld.o
-	ld65 helloworld.o -t nes -o helloworld.nes
+helloworld.nes: src/helloworld.o
+	ld65 src/*.o -t nes -o helloworld.nes
 
 clean:
-	rm *.o *.nes
+	rm src/*.o *.nes
 
