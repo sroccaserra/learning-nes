@@ -1,13 +1,7 @@
 ; vim: set filetype=asmM6502:
 
-PPUCTRL = $2000
-PPUMASK = $2001
-PPUSTATUS = $2002
-PPUADDR = $2006
-PPUDATA = $2007
-
-.segment "HEADER"
-.byte "NES", 26, 2, 1, 0, 0
+.include "constants.inc"
+.include "header.inc"
 
 .segment "CODE"
 .proc irq_handler

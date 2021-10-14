@@ -1,0 +1,7 @@
+; vim: set filetype=asmM6502:
+
+PPUCTRL = $2000
+PPUMASK = $2001
+PPUSTATUS = $2002
+PPUADDR = $2006
+PPUDATA = $2007
