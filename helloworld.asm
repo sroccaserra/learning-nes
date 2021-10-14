@@ -1,5 +1,10 @@
 ; vim: set filetype=asmM6502:
 
+PPUMASK = $2001
+PPUSTATUS = $2002
+PPUADDR = $2006
+PPUDATA = $2007
+
 .segment "HEADER"
 .byte "NES", 26, 2, 1, 0, 0
 
@@ -25,15 +30,16 @@ vblankwait:
 .endproc
 
 .proc main
-  LDX $2002
+  LDX PPUSTATUS ; resets the address latch
   LDX #$3f
-  STX $2006
+  STX PPUADDR
   LDX #$00
-  STX $2006
-  LDA #$29
-  STA $2007
+  STX PPUADDR
+  LDA #$11
+  STA PPUDATA
+
   LDA #%00011110
-  STA $2001
+  STA PPUMASK
 forever:
   JMP forever
 .endproc
