@@ -33,6 +33,5 @@ forever:
 .segment "VECTORS"
 .addr nmi_handler, reset_handler, irq_handler
 
-.segment "CHARS"
+.segment "CHR"
 .res 8192           ; the 8 kB graphics mem, all zeros
-.segment "STARTUP"

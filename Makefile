@@ -7,7 +7,7 @@ OBJ_FILES = $(ASM_FILES:.asm=.o)
 	ca65 $<
 
 helloworld.nes: $(OBJ_FILES)
-	ld65 $(OBJ_FILES) -t nes -o helloworld.nes
+	ld65 $(OBJ_FILES) -C nes.cfg -o helloworld.nes
 
 clean:
 	rm -f **/*.o *.nes
