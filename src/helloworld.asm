@@ -12,18 +12,9 @@
   RTI
 .endproc
 
-.proc reset_handler
-  SEI               ; set interrupt ignore bit
-  CLD               ; clear decimal mode bit
-  LDX #$00
-  STX PPUCTRL       ; turn off non maskable interrupts (NMI)
-  STX PPUMASK       ; disable rendering
-vblankwait:
-  BIT PPUSTATUS
-  BPL vblankwait    ; loop waiting for vblank
-  JMP main
-.endproc
+.import reset_handler
 
+.export main
 .proc main
   LDX PPUSTATUS     ; resets the address latch
   LDX #$3f

@@ -1,11 +1,13 @@
 build: helloworld.nes
 
-src/helloworld.o: src/helloworld.asm
-	ca65 src/helloworld.asm
+ASM_FILES = $(shell find src -type f -name '*.asm')
+OBJ_FILES = $(ASM_FILES:.asm=.o)
 
-helloworld.nes: src/helloworld.o
-	ld65 src/*.o -t nes -o helloworld.nes
+%.o: %.asm
+	ca65 $<
+
+helloworld.nes: $(OBJ_FILES)
+	ld65 $(OBJ_FILES) -t nes -o helloworld.nes
 
 clean:
-	rm src/*.o *.nes
-
+	rm -f **/*.o *.nes
