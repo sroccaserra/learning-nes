@@ -38,7 +38,7 @@ load_sprites:
   LDA sprites,X
   STA $0200,X
   INX
-  CPX #4
+  CPX #16
   BNE load_sprites
 
 vblankwait:         ; wait for another vblank before continuing
@@ -72,6 +72,9 @@ palettes:
 
 sprites:
 .byte $70, $05, $00, $80  ; Y, tile n°, attrs, X
+.byte $70, $06, $00, $88
+.byte $78, $07, $00, $80
+.byte $78, $08, $00, $88
 
 .segment "CHR"
 .incbin "graphics.chr"
