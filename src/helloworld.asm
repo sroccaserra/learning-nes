@@ -30,7 +30,7 @@ load_palettes:
   LDA palettes,X
   STA PPUDATA
   INX
-  CPX #4
+  CPX #32
   BNE load_palettes
 
   LDX #0
@@ -58,8 +58,18 @@ forever:
 .addr nmi_handler, reset_handler, irq_handler
 
 .segment "RODATA"
+
 palettes:
-.byte $29, $19, $09, $0f
+.byte $0f, $12, $23, $27  ; Background palettes
+.byte $0f, $2b, $3c, $39
+.byte $0f, $0c, $07, $13
+.byte $0f, $19, $09, $29
+
+.byte $0f, $2d, $10, $15  ; Sprites palettes
+.byte $0f, $19, $09, $29
+.byte $0f, $19, $09, $29
+.byte $0f, $19, $09, $29
+
 sprites:
 .byte $70, $05, $00, $80  ; Y, tile n°, attrs, X
 
