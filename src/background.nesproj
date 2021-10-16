@@ -1,0 +1,8 @@
+{
+  "filename": "background.nesproj",
+  "filepath": "/Users/sebastien.roccaserra/Developer/github/learning-nes/src/background.nesproj",
+  "bank": 1,
+  "nametable": "/Users/sebastien.roccaserra/Developer/github/learning-nes/src/background.nam",
+  "tileset": "/Users/sebastien.roccaserra/Developer/github/learning-nes/src/graphics.chr",
+  "palettes": "/Users/sebastien.roccaserra/Developer/github/learning-nes/src/background.pal"
+}
