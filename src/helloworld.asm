@@ -20,20 +20,18 @@
 
 .export main
 .proc main
-  ; write first palette
+  ; write palettes
   LDX PPUSTATUS     ; resets the address latch
   LDX #$3f
   STX PPUADDR
   LDX #$00
   STX PPUADDR       ; sets #$3f00 (first palette index) as address
-  LDA #$29
-  STA PPUDATA       ; writes #$29 as background color index
-  LDA #$19
-  STA PPUDATA       ; writes 3 other colors
-  LDA #$09
+load_palettes:
+  LDA palettes,X
   STA PPUDATA
-  LDA #$0f
-  STA PPUDATA
+  INX
+  CPX #$04
+  BNE load_palettes
 
   ; write sprite data
   LDA #$70
@@ -60,6 +58,10 @@ forever:
 
 .segment "VECTORS"
 .addr nmi_handler, reset_handler, irq_handler
+
+.segment "RODATA"
+palettes:
+.byte $29, $19, $09, $0f
 
 .segment "CHR"
 .incbin "graphics.chr"
