@@ -3,6 +3,12 @@
 .include "constants.inc"
 .include "header.inc"
 
+.segment "ZEROPAGE"
+player_x: .res 1
+player_y: .res 1
+player_dir: .res 1
+.exportzp player_x, player_y
+
 .segment "CODE"
 .proc irq_handler
   RTI
@@ -13,6 +19,9 @@
   STA OAMADDR
   LDA #$02
   STA OAMDMA
+
+  jsr draw_player
+
   LDA #$00
   STA PPUSCROLL
   STA PPUSCROLL
@@ -35,14 +44,6 @@ load_palettes:
   INX
   CPX #32
   BNE load_palettes
-
-  LDX #0
-load_sprites:
-  LDA sprites,X
-  STA $0200,X
-  INX
-  CPX #16
-  BNE load_sprites
 
   ; write a nametable big stars first
   LDA PPUSTATUS
@@ -186,6 +187,69 @@ forever:
   JMP forever
 .endproc
 
+.proc draw_player
+  php
+  pha
+  txa
+  pha
+  tya
+  pha
+
+  ; tile numbers
+  lda #$05
+  sta $0201
+  lda #$06
+  sta $0205
+  lda #$07
+  sta $0209
+  lda #$08
+  sta $020d
+
+  ; tile attributes (palette 0)
+  lda #$00
+  sta $0202
+  sta $0206
+  sta $020a
+  sta $020e
+
+  ; tile locations
+  lda player_y
+  sta $0200
+  lda player_x
+  sta $0203
+
+  lda player_y
+  sta $0204
+  lda player_x
+  clc
+  adc #$08
+  sta $0207
+
+  lda player_y
+  clc
+  adc #$08
+  sta $0208
+  lda player_x
+  sta $020b
+
+  lda player_y
+  clc
+  adc #$08
+  sta $020c
+  lda player_x
+  clc
+  adc #$08
+  sta $020f
+
+  pla
+  tay
+  pla
+  tax
+  pla
+  plp
+  rts
+.endproc
+
 .segment "VECTORS"
 .addr nmi_handler, reset_handler, irq_handler
 
@@ -201,12 +265,6 @@ palettes:
 .byte $0f, $19, $09, $29
 .byte $0f, $19, $09, $29
 .byte $0f, $19, $09, $29
-
-sprites:
-.byte $70, $05, $00, $80  ; Y, tile n°, attrs, X
-.byte $70, $06, $00, $88
-.byte $78, $07, $00, $80
-.byte $78, $08, $00, $88
 
 .segment "CHR"
 .incbin "graphics.chr"

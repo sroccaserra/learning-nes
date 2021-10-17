@@ -2,6 +2,9 @@
 
 .include "constants.inc"
 
+.segment "ZEROPAGE"
+.importzp player_x, player_y
+
 .segment "CODE"
 
 .import main
@@ -27,6 +30,11 @@ clear_oam:
   INX
   INX
   BNE clear_oam
+
+  lda #$80
+  sta player_x
+  lda #$a0
+  sta player_y
 
 vblankwait2:
   BIT PPUSTATUS
