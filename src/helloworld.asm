@@ -2,6 +2,7 @@
 
 .include "constants.inc"
 .include "header.inc"
+.include "macros.inc"
 
 .segment "ZEROPAGE"
 player_x: .res 1
@@ -74,7 +75,6 @@ load_palettes:
   LDA #$52
   STA PPUADDR
   STX PPUDATA
-
 
   ; next, small star 1
   LDA PPUSTATUS
@@ -188,12 +188,7 @@ forever:
 .endproc
 
 .proc draw_player
-  php
-  pha
-  txa
-  pha
-  tya
-  pha
+  push_registers
 
   ; tile numbers
   lda #$05
@@ -241,12 +236,7 @@ forever:
   adc #$08
   sta $020f
 
-  pla
-  tay
-  pla
-  tax
-  pla
-  plp
+  pop_registers
   rts
 .endproc
 
