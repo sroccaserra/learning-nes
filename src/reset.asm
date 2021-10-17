@@ -3,7 +3,7 @@
 .include "constants.inc"
 
 .segment "ZEROPAGE"
-.importzp player_x, player_y
+.importzp player_x, player_y, scroll_y
 
 .segment "CODE"
 
@@ -35,6 +35,8 @@ clear_oam:
   sta player_x
   lda #160
   sta player_y
+  lda #0
+  sta scroll_y
 
 vblankwait2:
   BIT PPUSTATUS

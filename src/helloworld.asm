@@ -8,7 +8,8 @@
 player_x: .res 1
 player_y: .res 1
 player_dir: .res 1
-.exportzp player_x, player_y
+scroll_y: .res 1
+.exportzp player_x, player_y, scroll_y
 
 .segment "CODE"
 .proc irq_handler
@@ -23,9 +24,18 @@ player_dir: .res 1
 
   jsr update_player
   jsr draw_player
+  dec scroll_y
+  lda scroll_y
+  cmp #239
+  bcc skip
+  lda #239
+  sta scroll_y
+
+skip:
 
   LDA #$00
   STA PPUSCROLL
+  LDA scroll_y
   STA PPUSCROLL
   RTI
 .endproc
