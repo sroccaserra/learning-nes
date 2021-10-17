@@ -31,9 +31,9 @@ clear_oam:
   INX
   BNE clear_oam
 
-  lda #$80
+  lda #128
   sta player_x
-  lda #$a0
+  lda #160
   sta player_y
 
 vblankwait2:

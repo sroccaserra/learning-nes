@@ -21,6 +21,7 @@ player_dir: .res 1
   LDA #$02
   STA OAMDMA
 
+  jsr update_player
   jsr draw_player
 
   LDA #$00
@@ -236,6 +237,44 @@ forever:
   adc #$08
   sta $020f
 
+  pop_registers
+  rts
+.endproc
+
+.proc update_player
+  push_registers
+
+  lda player_x
+  cmp #224
+  bcc not_at_right_edge
+  ; if BCC is not taken, we are greater than 224
+  lda #0
+  sta player_dir    ; start moving left
+  jmp direction_set ; we already chose a direction,
+                    ; so we can skip the left side check
+not_at_right_edge:
+  lda player_x
+  cmp #16
+  bcs direction_set
+  ; if BCS not taken, we are less than 16
+  lda #1
+  sta player_dir   ; start moving right
+
+direction_set:
+  ; now, actually update player_x
+  lda player_dir
+  cmp #1
+  beq move_right
+  ; if player_dir minus 1 is not zero,
+  ; that means player_dir was 0 and
+  ; we need to move left
+  dec player_x
+  jmp exit_subroutine
+
+move_right:
+  inc player_x
+
+exit_subroutine:
   pop_registers
   rts
 .endproc
