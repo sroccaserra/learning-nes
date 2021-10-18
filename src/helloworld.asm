@@ -26,12 +26,11 @@ scroll_y: .res 1
   jsr draw_player
   dec scroll_y
   lda scroll_y
-  cmp #239
-  bcc skip
-  lda #239
+  cmp #MAX_Y
+  bcc :+
+  lda #MAX_Y
   sta scroll_y
-
-skip:
+  :
 
   LDA #$00
   STA PPUSCROLL
