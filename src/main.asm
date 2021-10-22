@@ -20,14 +20,14 @@ hi_2: .res 1
 
 .segment "CODE"
 .proc irq_handler
-  RTI
+  rti
 .endproc
 
 .proc nmi_handler
-  LDA #$00
-  STA OAMADDR
-  LDA #$02
-  STA OAMDMA
+  lda #$00
+  sta OAMADDR
+  lda #$02
+  sta OAMDMA
 
   jsr update_player
   jsr draw_player
@@ -39,11 +39,11 @@ hi_2: .res 1
   sta scroll_y
   :
 
-  LDA #$00
-  STA PPUSCROLL
-  LDA scroll_y
-  STA PPUSCROLL
-  RTI
+  lda #$00
+  sta PPUSCROLL
+  lda scroll_y
+  sta PPUSCROLL
+  rti
 .endproc
 
 .import reset_handler
