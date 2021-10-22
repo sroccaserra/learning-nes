@@ -1,12 +1,12 @@
 build: program.nes
 
-ASM_FILES = $(shell find src -type f -name '*.asm')
-OBJ_FILES = $(ASM_FILES:.asm=.o)
+ASM_FILES = $(shell find src -type f -name '*.s')
+OBJ_FILES = $(ASM_FILES:.s=.o)
 
-src/main.o: src/main.asm src/*.inc src/*.chr
-	ca65 --debug-info src/main.asm
+src/main.o: src/main.s src/*.inc src/*.chr
+	ca65 --debug-info src/main.s
 
-%.o: %.asm
+%.o: %.s
 	ca65 --debug-info $<
 
 program.nes: $(OBJ_FILES)

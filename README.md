@@ -2,8 +2,8 @@
 
 #### PPU
 
-The first screen tiles are in $2000-$23bf included. The first screen attributes
-are in $23c0-$23ff.
+The first screen tile indexes are in $2000-$23bf included. The first screen
+attributes are in $23c0-$23ff.
 
 A one byte attribute sets the bg color palettes of a square of 4x4 tiles, or
 four 2x2 tiles. There are 64 attributes ($40).
