@@ -17,8 +17,6 @@ lo_1: .res 1
 hi_1: .res 1
 lo_2: .res 1
 hi_2: .res 1
-flag: .res 1
-
 
 .segment "CODE"
 .proc irq_handler
@@ -107,9 +105,9 @@ forever:
   lda #$00          ; start low memory address
   sta lo_1
 
-;  lda #$20          ; end high memory address
-;  sta hi_2
-  lda #$00          ; end low memory address
+  lda #$23          ; end high memory address
+  sta hi_2
+  lda #$c0          ; end low memory address
   sta lo_2
 
 loop:
@@ -121,9 +119,22 @@ loop:
   sta PPUADDR
   sty PPUDATA
   ; arithmetics
-  inc lo_1
+  clc
+  lda lo_1
+  adc #1
+  sta lo_1
+  lda hi_1
+  adc #0
+  sta hi_1
+
+  ;;
+  ; compare
   lda lo_1
   cmp lo_2
+  bne loop
+
+  lda hi_1
+  cmp hi_2
   bne loop
 
   pop_registers

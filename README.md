@@ -1,6 +1,33 @@
 ### Learnings
 
+#### PPU
+
+The first screen tiles are in $2000-$23bf included. The first screen attributes
+are in $23c0-$23ff.
+
+A one byte attribute sets the bg color palettes of a square of 4x4 tiles, or
+four 2x2 tiles. There are 64 attributes ($40).
+
+- PPU nametables ~ <https://wiki.nesdev.org/w/index.php/PPU_nametables>
+- PPU attribute tables ~ <https://wiki.nesdev.org/w/index.php?title=PPU_attribute_tables>
+
+#### Arithmetics
+
 ADC #$00 adds #1 when the carry flag is set.
+
+Warning: INC doesn't set the carry flag.
+
+16 bit counter:
+
+```asm
+  CLC
+  LDA counter_low
+  ADC #1
+  STA counter_low
+  LDA counter_high
+  ADC #0
+  STA counter_high
+```
 
 8 bit addition with 16 bit result:
 
@@ -92,6 +119,7 @@ Divide a 16 bit number by 2:
 
 #### Code
 
+- Beyond 8-bit Unsigned Comparisons ~ <http://www.6502.org/tutorials/compare_beyond.html>
 - smbdis.asm - A comprehensive Super Mario Bros. disassembly ~ <https://gist.github.com/1wert3r/4048722>
 - Disassembly by doppelganger ~ <https://6502disassembly.com/nes-smb/SuperMarioBros.html>
 - SMB Disassembly CC65 ~ <https://github.com/threecreepio/smb-disassembly>
