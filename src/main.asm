@@ -12,9 +12,12 @@ player_dir: .res 1
 scroll_y: .res 1
 .exportzp player_x, player_y, scroll_y
 
-; temp variables for address arithmetics
-lo: .res 1
-hi: .res 1
+; temp variables for various arithmetics
+lo_1: .res 1
+hi_1: .res 1
+lo_2: .res 1
+hi_2: .res 1
+flag: .res 1
 
 
 .segment "CODE"
@@ -98,24 +101,29 @@ forever:
   push_registers
 
   ldy #$30          ; tile number
-  ldx #$00          ; counter
 
   lda #$20          ; start high memory address
-  sta hi
+  sta hi_1
   lda #$00          ; start low memory address
-  sta lo
+  sta lo_1
+
+;  lda #$20          ; end high memory address
+;  sta hi_2
+  lda #$00          ; end low memory address
+  sta lo_2
 
 loop:
   ; load values to PPU
   lda PPUSTATUS
-  lda hi
+  lda hi_1
   sta PPUADDR
-  lda lo
+  lda lo_1
   sta PPUADDR
   sty PPUDATA
   ; arithmetics
-  inc lo
-  dex
+  inc lo_1
+  lda lo_1
+  cmp lo_2
   bne loop
 
   pop_registers
