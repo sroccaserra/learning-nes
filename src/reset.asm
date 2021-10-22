@@ -11,25 +11,25 @@
 
 .export reset_handler
 .proc reset_handler
-  SEI               ; set interrupt ignore bit
-  CLD               ; clear decimal mode bit
-  LDX #$00
-  STX PPUCTRL       ; turn off non maskable interrupts (NMI)
-  STX PPUMASK       ; disable rendering
+  sei               ; set interrupt ignore bit
+  cld               ; clear decimal mode bit
+  ldx #$00
+  stx PPUCTRL       ; turn off non maskable interrupts (NMI)
+  stx PPUMASK       ; disable rendering
 
-vblankwait:
-  BIT PPUSTATUS
-  BPL vblankwait    ; loop waiting for vblank
+@vblankwait:
+  bit PPUSTATUS
+  bpl @vblankwait   ; loop waiting for vblank
 
-  LDX #$00
-  LDA #$ff
-clear_oam:
-  STA $0200,X       ; set all sprite y-positions off the screen
-  INX
-  INX
-  INX
-  INX
-  BNE clear_oam
+  ldx #$00
+  lda #$ff
+@clear_oam:
+  sta $0200,X       ; set all sprite y-positions off the screen
+  inx
+  inx
+  inx
+  inx
+  bne @clear_oam
 
   lda #128
   sta player_x
@@ -38,9 +38,9 @@ clear_oam:
   lda #0
   sta scroll_y
 
-vblankwait2:
-  BIT PPUSTATUS
-  BPL vblankwait2
+@vblankwait2:
+  bit PPUSTATUS
+  bpl @vblankwait2
 
-  JMP main
+  jmp main
 .endproc
