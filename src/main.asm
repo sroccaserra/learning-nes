@@ -167,44 +167,7 @@ load_palettes:
   STA PPUADDR
   STX PPUDATA
 
-  ; a few bricks
-  LDA PPUSTATUS
-  LDA #$22
-  STA PPUADDR
-  LDA #$f2
-  STA PPUADDR
-  LDX #$30
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$22
-  STA PPUADDR
-  LDA #$f3
-  STA PPUADDR
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$22
-  STA PPUADDR
-  LDA #$f4
-  STA PPUADDR
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$22
-  STA PPUADDR
-  LDA #$f5
-  STA PPUADDR
-  LDX #$31
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$22
-  STA PPUADDR
-  LDA #$f6
-  STA PPUADDR
-  LDX #$30
-  STX PPUDATA
+  jsr add_bricks
 
   ; finally, attribute table
   LDA PPUSTATUS
@@ -234,6 +197,34 @@ vblankwait:         ; wait for another vblank before continuing
   STA PPUMASK       ; enable rendering
 forever:
   JMP forever
+.endproc
+
+.proc add_bricks
+  push_registers
+
+  LDY #$30
+  LDX #$ff
+  :
+  LDA PPUSTATUS
+  LDA #$20
+  STA PPUADDR
+  txa
+  adc #$00
+  STA PPUADDR
+  STY PPUDATA
+  dex
+  bne :-
+
+  LDA PPUSTATUS
+  LDA #$22
+  STA PPUADDR
+  LDA #$f5
+  STA PPUADDR
+  LDX #$31
+  STX PPUDATA
+
+  pop_registers
+  rts
 .endproc
 
 .proc draw_player
