@@ -51,48 +51,48 @@ hi_2: .res 1
 .export main
 .proc main
   ; write palettes
-  LDX PPUSTATUS     ; resets the address latch
-  LDX #$3f
-  STX PPUADDR
-  LDX #$00
-  STX PPUADDR       ; sets #$3f00 (first palette index) as address
-load_palettes:
-  LDA palettes,X
-  STA PPUDATA
-  INX
-  CPX #32
-  BNE load_palettes
+  ldx PPUSTATUS     ; resets the address latch
+  ldx #$3f
+  stx PPUADDR
+  ldx #$00
+  stx PPUADDR       ; sets #$3f00 (first palette index) as address
+@load_palettes:
+  lda palettes,X
+  sta PPUDATA
+  inx
+  cpx #32
+  bne @load_palettes
 
   jsr add_bricks
 
   ; finally, attribute table
-  LDA PPUSTATUS
-  LDA #$23
-  STA PPUADDR
-  LDA #$c2
-  STA PPUADDR
-  LDA #%01000000
-  STA PPUDATA
+  lda PPUSTATUS
+  lda #$23
+  sta PPUADDR
+  lda #$c2
+  sta PPUADDR
+  lda #%01000000
+  sta PPUDATA
 
-  LDA PPUSTATUS
-  LDA #$23
-  STA PPUADDR
-  LDA #$e0
-  STA PPUADDR
-  LDA #%00001100
-  STA PPUDATA
+  lda PPUSTATUS
+  lda #$23
+  sta PPUADDR
+  lda #$e0
+  sta PPUADDR
+  lda #%00001100
+  sta PPUDATA
 
-vblankwait:         ; wait for another vblank before continuing
-  BIT PPUSTATUS
-  BPL vblankwait
+@vblankwait:         ; wait for another vblank before continuing
+  bit PPUSTATUS
+  bpl @vblankwait
 
-  LDA #%10010000
-  STA PPUCTRL       ; turn on NMIs, sprites use first pattern table
+  lda #%10010000
+  sta PPUCTRL       ; turn on NMIs, sprites use first pattern table
 
-  LDA #%00011110
-  STA PPUMASK       ; enable rendering
-forever:
-  JMP forever
+  lda #%00011110
+  sta PPUMASK       ; enable rendering
+@forever:
+  jmp @forever
 .endproc
 
 .proc add_bricks
@@ -110,7 +110,7 @@ forever:
   lda #$c0          ; end low memory address
   sta lo_2
 
-loop:
+@loop:
   ; load values to PPU
   lda PPUSTATUS
   lda hi_1
@@ -131,11 +131,11 @@ loop:
   ; compare
   lda lo_1
   cmp lo_2
-  bne loop
+  bne @loop
 
   lda hi_1
   cmp hi_2
-  bne loop
+  bne @loop
 
   pop_registers
   rts
