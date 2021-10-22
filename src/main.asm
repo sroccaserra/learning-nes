@@ -5,11 +5,17 @@
 .include "macros.inc"
 
 .segment "ZEROPAGE"
+; state variables
 player_x: .res 1
 player_y: .res 1
 player_dir: .res 1
 scroll_y: .res 1
 .exportzp player_x, player_y, scroll_y
+
+; temp variables for address arithmetics
+lo: .res 1
+hi: .res 1
+
 
 .segment "CODE"
 .proc irq_handler
@@ -56,117 +62,6 @@ load_palettes:
   CPX #32
   BNE load_palettes
 
-  ; write a nametable big stars first
-  LDA PPUSTATUS
-  LDA #$20
-  STA PPUADDR
-  LDA #$6b
-  STA PPUADDR
-  LDX #$2d
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$21
-  STA PPUADDR
-  LDA #$57
-  STA PPUADDR
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$22
-  STA PPUADDR
-  LDA #$23
-  STA PPUADDR
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$23
-  STA PPUADDR
-  LDA #$52
-  STA PPUADDR
-  STX PPUDATA
-
-  ; next, small star 1
-  LDA PPUSTATUS
-  LDA #$20
-  STA PPUADDR
-  LDA #$74
-  STA PPUADDR
-  LDX #$2e
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$21
-  STA PPUADDR
-  LDA #$43
-  STA PPUADDR
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$21
-  STA PPUADDR
-  LDA #$5d
-  STA PPUADDR
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$21
-  STA PPUADDR
-  LDA #$73
-  STA PPUADDR
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$22
-  STA PPUADDR
-  LDA #$2f
-  STA PPUADDR
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$22
-  STA PPUADDR
-  LDA #$f7
-  STA PPUADDR
-  STX PPUDATA
-
-  ; finally, small star 2
-  LDA PPUSTATUS
-  LDA #$20
-  STA PPUADDR
-  LDA #$f1
-  STA PPUADDR
-  LDX #$2f
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$21
-  STA PPUADDR
-  LDA #$a8
-  STA PPUADDR
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$22
-  STA PPUADDR
-  LDA #$7a
-  STA PPUADDR
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$23
-  STA PPUADDR
-  LDA #$44
-  STA PPUADDR
-  STX PPUDATA
-
-  LDA PPUSTATUS
-  LDA #$23
-  STA PPUADDR
-  LDA #$7c
-  STA PPUADDR
-  STX PPUDATA
-
   jsr add_bricks
 
   ; finally, attribute table
@@ -202,26 +97,26 @@ forever:
 .proc add_bricks
   push_registers
 
-  LDY #$30
-  LDX #$ff
-  :
-  LDA PPUSTATUS
-  LDA #$20
-  STA PPUADDR
-  txa
-  adc #$00
-  STA PPUADDR
-  STY PPUDATA
-  dex
-  bne :-
+  ldy #$30          ; tile number
+  ldx #$00          ; counter
 
-  LDA PPUSTATUS
-  LDA #$22
-  STA PPUADDR
-  LDA #$f5
-  STA PPUADDR
-  LDX #$31
-  STX PPUDATA
+  lda #$20          ; start high memory address
+  sta hi
+  lda #$00          ; start low memory address
+  sta lo
+
+loop:
+  ; load values to PPU
+  lda PPUSTATUS
+  lda hi
+  sta PPUADDR
+  lda lo
+  sta PPUADDR
+  sty PPUDATA
+  ; arithmetics
+  inc lo
+  dex
+  bne loop
 
   pop_registers
   rts
