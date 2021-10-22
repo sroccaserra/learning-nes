@@ -125,3 +125,4 @@ Divide a 16 bit number by 2:
 - SMB Disassembly CC65 ~ <https://github.com/threecreepio/smb-disassembly>
 - Minimal NES example using ca65 ~ <https://github.com/bbbradsmith/NES-ca65-example>
 - NES Programming ~ <https://www.youtube.com/playlist?list=PL29OkqO3wUxyF9BsTAgZkmCEVtC77rgff>
+- Nerdy Nights ~ <https://taywee.github.io/NerdyNights/nerdynights.html>
