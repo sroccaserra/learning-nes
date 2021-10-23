@@ -116,13 +116,23 @@ Divide a 16 bit number by 2:
 - 6502 Instruction Set ~ <https://www.masswerk.at/6502/6502_instruction_set.html>
 - cc65 Documentation Overview ~ <https://cc65.github.io/doc/>
 - ca65 Users Guide ~ <https://cc65.github.io/doc/ca65.html>
+- Beyond 8-bit Unsigned Comparisons ~ <http://www.6502.org/tutorials/compare_beyond.html>
 
 #### Code
 
-- Beyond 8-bit Unsigned Comparisons ~ <http://www.6502.org/tutorials/compare_beyond.html>
+- NROM ~ <https://wiki.nesdev.org/w/index.php?title=NROM>
+- Programming NROM ~ <https://wiki.nesdev.org/w/index.php?title=Programming_NROM>
+- Nerdy Nights ~ <https://taywee.github.io/NerdyNights/nerdynights.html>
+- Minimal NES example using ca65 ~ <https://github.com/bbbradsmith/NES-ca65-example>
+- NES Programming ~ <https://www.youtube.com/playlist?list=PL29OkqO3wUxyF9BsTAgZkmCEVtC77rgff>
 - smbdis.asm - A comprehensive Super Mario Bros. disassembly ~ <https://gist.github.com/1wert3r/4048722>
 - Disassembly by doppelganger ~ <https://6502disassembly.com/nes-smb/SuperMarioBros.html>
 - SMB Disassembly CC65 ~ <https://github.com/threecreepio/smb-disassembly>
-- Minimal NES example using ca65 ~ <https://github.com/bbbradsmith/NES-ca65-example>
-- NES Programming ~ <https://www.youtube.com/playlist?list=PL29OkqO3wUxyF9BsTAgZkmCEVtC77rgff>
-- Nerdy Nights ~ <https://taywee.github.io/NerdyNights/nerdynights.html>
+
+#### For future reference
+
+- CHR ROM vs. CHR RAM ~ <https://wiki.nesdev.org/w/index.php?title=CHR_ROM_vs._CHR_RAM#Switching_to_CHR_RAM>
+- UxROM ~ <https://wiki.nesdev.org/w/index.php?title=UxROM>
+- Programming UNROM ~ <https://wiki.nesdev.org/w/index.php?title=Programming_UNROM>
+- MMC1 ~ <https://wiki.nesdev.org/w/index.php?title=MMC1>
+- Programming MMC1 ~ <https://wiki.nesdev.org/w/index.php?title=Programming_MMC1>
