@@ -3,7 +3,12 @@ OBJ_FILES = $(ASM_FILES:.s=.o)
 
 NAME = program
 
-build: $(NAME).nes $(NAME).dbg
+ROM = $(NAME).nes
+SYMBOLS = $(NAME).nes.dbg
+FCEUX_BOOKMARKS = $(NAME).dbg
+FCEUX_DEBUG_MARKERS = $(NAME).nes.0.nl
+
+build: $(ROM) $(FCEUX_BOOKMARKS) $(FCEUX_DEBUG_MARKERS)
 
 src/main.o: src/main.s src/*.inc src/*.chr
 	ca65 --debug-info src/main.s
@@ -11,11 +16,14 @@ src/main.o: src/main.s src/*.inc src/*.chr
 %.o: %.s
 	ca65 --debug-info $<
 
-$(NAME).nes: $(OBJ_FILES)
-	ld65 $(OBJ_FILES) -C nes.cfg -o $(NAME).nes --dbgfile $(NAME).nes.dbg
+$(ROM): $(OBJ_FILES)
+	ld65 $(OBJ_FILES) -C nes.cfg -o $(ROM) --dbgfile $(SYMBOLS)
 
-$(NAME).dbg: $(NAME).nes
-	bash generate_bookmarks.sh $(NAME)
+$(FCEUX_BOOKMARKS): $(ROM)
+	bash generate_bookmarks.sh $(SYMBOLS) > $(FCEUX_BOOKMARKS)
+
+$(FCEUX_DEBUG_MARKERS): $(ROM)
+	bash generate_debug_markers.sh $(SYMBOLS) > $(FCEUX_DEBUG_MARKERS)
 
 clean:
-	rm -f **/*.o *.nes *.dbg
+	rm -f **/*.o *.nes *.dbg *.nl
