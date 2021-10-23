@@ -103,11 +103,11 @@ Divide a 16 bit number by 2:
 
 ### References
 
-#### Nes
+#### Introductions
 
 - Famicom Party ~ <https://famicom.party/book>
-- Nesdev Wiki ~ <https://wiki.nesdev.org/w/index.php/Nesdev_Wiki>
 - Game Development in Eight Bits ~ <https://www.youtube.com/watch?v=TPbroUDHG0s>
+- Nerdy Nights ~ <https://taywee.github.io/NerdyNights/nerdynights.html>
 
 #### 6502
 
@@ -118,11 +118,21 @@ Divide a 16 bit number by 2:
 - ca65 Users Guide ~ <https://cc65.github.io/doc/ca65.html>
 - Beyond 8-bit Unsigned Comparisons ~ <http://www.6502.org/tutorials/compare_beyond.html>
 
-#### Code
+#### NES
 
+- Nesdev Wiki ~ <https://wiki.nesdev.org/w/index.php/Nesdev_Wiki>
 - NROM ~ <https://wiki.nesdev.org/w/index.php?title=NROM>
 - Programming NROM ~ <https://wiki.nesdev.org/w/index.php?title=Programming_NROM>
-- Nerdy Nights ~ <https://taywee.github.io/NerdyNights/nerdynights.html>
+- CPU memory map ~ <https://wiki.nesdev.org/w/index.php?title=CPU_memory_map>
+- PPU registers - PPUCTRL ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#PPUCTRL>
+- PPU registers - PPUMASK ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#PPUMASK>
+- PPU registers - PPUSTATUS ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#PPUSTATUS>
+- PPU registers - OAMDMA ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#OAMDMA>
+- PPU nametables ~ <https://wiki.nesdev.org/w/index.php/PPU_nametables>
+- PPU attribute tables ~ <https://wiki.nesdev.org/w/index.php?title=PPU_attribute_tables>
+
+#### Code
+
 - Minimal NES example using ca65 ~ <https://github.com/bbbradsmith/NES-ca65-example>
 - NES Programming ~ <https://www.youtube.com/playlist?list=PL29OkqO3wUxyF9BsTAgZkmCEVtC77rgff>
 - smbdis.asm - A comprehensive Super Mario Bros. disassembly ~ <https://gist.github.com/1wert3r/4048722>
