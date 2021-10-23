@@ -110,13 +110,14 @@ hi_2: .res 1
   lda #$c0          ; end low memory address
   sta lo_2
 
-@loop:
-  ; load values to PPU
   lda PPUSTATUS
   lda hi_1
   sta PPUADDR
   lda lo_1
   sta PPUADDR
+
+  ; load values to PPU
+@loop:
   sty PPUDATA
   ; arithmetics
   clc
@@ -126,13 +127,10 @@ hi_2: .res 1
   lda hi_1
   adc #0
   sta hi_1
-
-  ;;
   ; compare
   lda lo_1
   cmp lo_2
   bne @loop
-
   lda hi_1
   cmp hi_2
   bne @loop
