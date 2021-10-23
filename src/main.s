@@ -65,6 +65,52 @@ hi_2: .res 1
 
         jsr add_bricks
 
+        ; moon
+        lda PPUSTATUS           ; first row starting at $2000
+        lda #$20
+        sta PPUADDR
+        lda #$00
+        sta PPUADDR
+
+        lda #$32
+        sta PPUDATA
+        lda #$33
+        sta PPUDATA
+
+        lda PPUSTATUS           ; second row starting at $2020
+        lda #$20
+        sta PPUADDR
+        lda #$20
+        sta PPUADDR
+
+        lda #$34
+        sta PPUDATA
+        lda #$35
+        sta PPUDATA
+
+        ; star
+        lda PPUSTATUS           ; first row starting at $2090
+        lda #$20
+        sta PPUADDR
+        lda #$90
+        sta PPUADDR
+
+        lda #$29
+        sta PPUDATA
+        lda #$2a
+        sta PPUDATA
+
+        lda PPUSTATUS           ; second row starting at $20b0
+        lda #$20
+        sta PPUADDR
+        lda #$b0
+        sta PPUADDR
+
+        lda #$2b
+        sta PPUDATA
+        lda #$2c
+        sta PPUDATA
+
         ; finally, attribute table
         lda PPUSTATUS
         lda #$23
