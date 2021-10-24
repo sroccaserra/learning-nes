@@ -2,11 +2,19 @@
 
 #### PPU
 
-The first screen tile indexes are in $2000-$23bf included. The first screen
-attributes are in $23c0-$23ff.
+A tile contains 8 x 8 pixels.
+
+A screen consists of 32 x 30 = 960 tiles (or $20 x $1e = $3c0 tiles), this is
+256 x 240 pixels.
 
 A one byte attribute sets the bg color palettes of a square of 4x4 tiles, or
 four 2x2 tiles. There are 64 attributes ($40).
+
+So a screen consists of 960 + 64 = 1024 bytes, or $3c0 + $40 = $400 bytes.
+
+The first screen tile indexes are in $2000-$23bf included. The first screen
+attributes are in $23c0-$23ff. The next screen starts at $2400 (PPU memory, not
+CPU).
 
 - PPU nametables ~ <https://wiki.nesdev.org/w/index.php/PPU_nametables>
 - PPU attribute tables ~ <https://wiki.nesdev.org/w/index.php?title=PPU_attribute_tables>
@@ -136,6 +144,7 @@ Divide a 16 bit number by 2:
 - PPU registers - OAMDMA ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#OAMDMA>
 - PPU nametables ~ <https://wiki.nesdev.org/w/index.php/PPU_nametables>
 - PPU attribute tables ~ <https://wiki.nesdev.org/w/index.php?title=PPU_attribute_tables>
+- PPU palettes ~ <https://wiki.nesdev.org/w/index.php/PPU_palettes>
 
 #### Code
 
