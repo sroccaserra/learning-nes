@@ -63,7 +63,7 @@ hi_2: .res 1
         cpx #32
         bne @load_palettes
 
-        jsr add_bricks
+        jsr clear_background
 
         ; moon
         lda PPUSTATUS           ; first row starting at $2000
@@ -72,9 +72,11 @@ hi_2: .res 1
         lda #$00
         sta PPUADDR
 
-        lda #$32
+        ldx #0
+        lda moon,X
         sta PPUDATA
-        lda #$33
+        inx
+        lda moon,X
         sta PPUDATA
 
         lda PPUSTATUS           ; second row starting at $2020
@@ -83,12 +85,14 @@ hi_2: .res 1
         lda #$20
         sta PPUADDR
 
-        lda #$34
+        inx
+        lda moon,X
         sta PPUDATA
-        lda #$35
+        inx
+        lda moon,X
         sta PPUDATA
 
-        ; star
+        ; big star
         lda PPUSTATUS           ; first row starting at $2090
         lda #$20
         sta PPUADDR
@@ -110,6 +114,21 @@ hi_2: .res 1
         sta PPUDATA
         lda #$2c
         sta PPUDATA
+
+        ; small stars
+        ldy #$2d
+        ldx #0
+@loop:  lda PPUSTATUS
+        lda small_stars_pos,X
+        sta PPUADDR
+        inx
+        lda small_stars_pos,X
+        sta PPUADDR
+        inx
+        sty PPUDATA
+
+        cpx #16
+        bne @loop
 
         ; finally, attribute table
         lda PPUSTATUS
@@ -141,10 +160,10 @@ hi_2: .res 1
         jmp @forever
 .endproc
 
-.proc add_bricks
+.proc clear_background
         push_registers
 
-        ldy #$30                ; tile number
+        ldy #$00                ; tile number
 
         lda #$20                ; start high memory address
         sta hi_1
@@ -288,6 +307,13 @@ palettes:
 .byte $0f, $19, $09, $29
 .byte $0f, $19, $09, $29
 .byte $0f, $19, $09, $29
+
+moon:
+.byte $32, $33, $34, $35
+
+small_stars_pos:
+.byte $21, $2d, $23, $7b, $22, $b4, $21, $86
+.byte $20, $59, $22, $89, $20, $87, $23, $8c
 
 .segment "CHR"
 .incbin "graphics.chr"
