@@ -303,7 +303,7 @@ palettes:
 .byte $0f, $0c, $07, $13
 .byte $0f, $19, $09, $29
 
-.byte $0f, $2d, $10, $15        ; Sprites palettes
+.byte $0f, $11, $21, $20        ; Sprites palettes
 .byte $0f, $19, $09, $29
 .byte $0f, $19, $09, $29
 .byte $0f, $19, $09, $29
