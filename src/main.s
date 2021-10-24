@@ -115,20 +115,20 @@ hi_2: .res 1
         lda #$2c
         sta PPUDATA
 
-        ; small stars
         ldy #$2d
         ldx #0
-@loop:  lda PPUSTATUS
+@small_stars:
+        lda PPUSTATUS
         lda small_stars_pos,X
+        beq @end_small_stars
         sta PPUADDR
         inx
         lda small_stars_pos,X
         sta PPUADDR
         inx
         sty PPUDATA
-
-        cpx #16
-        bne @loop
+        jmp @small_stars
+@end_small_stars:
 
         ; finally, attribute table
         lda PPUSTATUS
@@ -311,9 +311,10 @@ palettes:
 moon:
 .byte $32, $33, $34, $35
 
-small_stars_pos:
-.byte $21, $2d, $23, $7b, $22, $b4, $21, $86
-.byte $20, $59, $22, $89, $20, $87, $23, $8c
+small_stars_pos:                ; null terminated, PPU addresses
+.dbyt $212d, $237b, $22b4, $2186
+.dbyt $2059, $2289, $2087, $238c
+.byte $00
 
 .segment "CHR"
 .incbin "graphics.chr"

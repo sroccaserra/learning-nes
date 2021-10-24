@@ -11,6 +11,14 @@ four 2x2 tiles. There are 64 attributes ($40).
 - PPU nametables ~ <https://wiki.nesdev.org/w/index.php/PPU_nametables>
 - PPU attribute tables ~ <https://wiki.nesdev.org/w/index.php?title=PPU_attribute_tables>
 
+#### ca65
+
+The .word and .addr commands defines word sized data in little-endian format.
+`.dword $1234` will emit the bytes `$34 $12`.
+
+The .dbyt command defines word sized data in big-endian format. `.dbyt $1234`
+will emit the bytes `$12 $34`.
+
 #### Arithmetics
 
 ADC #$00 adds #1 when the carry flag is set.
