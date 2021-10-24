@@ -3,7 +3,7 @@
 .include "constants.inc"
 
 .segment "ZEROPAGE"
-.importzp player_x, player_y, scroll_y
+.importzp player_x, player_y, scroll_y, joypad_1
 
 .segment "CODE"
 
@@ -16,6 +16,12 @@
         ldx #$00
         stx PPUCTRL             ; turn off non maskable interrupts (NMI)
         stx PPUMASK             ; disable rendering
+
+        ; disable sound
+        stx $4015
+        stx $4010
+        lda #$40
+        sta $4017
 
 @waitvb:
         bit PPUSTATUS
@@ -37,6 +43,7 @@
         sta player_y
         lda #0
         sta scroll_y
+        sta joypad_1
 
 @waitvb2:
         bit PPUSTATUS

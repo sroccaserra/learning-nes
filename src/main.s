@@ -5,12 +5,16 @@
 .include "macros.inc"
 
 .segment "ZEROPAGE"
+
 ; state variables
 player_x: .res 1
 player_y: .res 1
 player_dir: .res 1
 scroll_y: .res 1
 .exportzp player_x, player_y, scroll_y
+
+joypad_1: .res 1
+.exportzp joypad_1
 
 ; temp variables for various arithmetics
 lo_1: .res 1
@@ -19,9 +23,6 @@ lo_2: .res 1
 hi_2: .res 1
 
 .segment "CODE"
-.proc irq_handler
-        rti
-.endproc
 
 .proc nmi_handler
         lda #$00
@@ -29,7 +30,6 @@ hi_2: .res 1
         lda #$02
         sta OAMDMA
 
-        jsr update_player
         jsr draw_player
         dec scroll_y
         lda scroll_y
@@ -47,6 +47,10 @@ hi_2: .res 1
 .endproc
 
 .import reset_handler
+
+.proc irq_handler
+        rti
+.endproc
 
 .export main
 .proc main
@@ -156,8 +160,13 @@ hi_2: .res 1
 
         lda #%00011110
         sta PPUMASK             ; enable rendering
-@forever:
-        jmp @forever
+@loop:
+        bit PPUSTATUS
+        bpl @loop
+
+        jsr read_joypad
+        jsr update_player
+        jmp @loop
 .endproc
 
 .proc clear_background
@@ -202,6 +211,8 @@ hi_2: .res 1
         pop_registers
         rts
 .endproc
+
+.import read_joypad
 
 .proc draw_player
         push_registers
@@ -257,35 +268,32 @@ hi_2: .res 1
 .proc update_player
         push_registers
 
-        lda player_x
-        cmp #224
-        bcc not_at_right_edge
-        ; if BCC is not taken, we are greater than 224
-        lda #0
-        sta player_dir          ; start moving left
-        jmp direction_set       ; we already chose a direction,
-                                ; so we can skip the left side check
-not_at_right_edge:
-        lda player_x
-        cmp #16
-        bcs direction_set
-        ; if BCS not taken, we are less than 16
-        lda #1
-        sta player_dir          ; start moving right
+        lda joypad_1
+        and #PAD_U
+        beq :+
+        dec player_y
+        dec player_y
+        :
 
-direction_set:
-        ; now, actually update player_x
-        lda player_dir
-        cmp #1
-        beq move_right
-        ; if player_dir minus 1 is not zero,
-        ; that means player_dir was 0 and
-        ; we need to move left
+        lda joypad_1
+        and #PAD_D
+        beq :+
+        inc player_y
+        inc player_y
+        :
+
+        lda joypad_1
+        and #PAD_L
+        beq :+
         dec player_x
-        jmp exit_subroutine
-
-move_right:
+        dec player_x
+        :
+        lda joypad_1
+        and #PAD_R
+        beq :+
         inc player_x
+        inc player_x
+        :
 
 exit_subroutine:
         pop_registers
