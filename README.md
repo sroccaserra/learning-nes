@@ -147,6 +147,8 @@ Divide a 16 bit number by 2:
 - PPU nametables ~ <https://wiki.nesdev.org/w/index.php/PPU_nametables>
 - PPU attribute tables ~ <https://wiki.nesdev.org/w/index.php?title=PPU_attribute_tables>
 - PPU palettes ~ <https://wiki.nesdev.org/w/index.php/PPU_palettes>
+- NMI thread ~ <https://wiki.nesdev.org/w/index.php/NMI_thread>
+- The frame and NMIs ~ <https://wiki.nesdev.org/w/index.php?title=The_frame_and_NMIs>
 
 #### Code
 
