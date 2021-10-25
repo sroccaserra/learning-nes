@@ -25,6 +25,7 @@ hi_2: .res 1
 .segment "CODE"
 
 .proc nmi_handler
+        push_registers
         lda #$00
         sta OAMADDR
         lda #$02
@@ -43,6 +44,8 @@ hi_2: .res 1
         sta PPUSCROLL
         lda scroll_y
         sta PPUSCROLL
+
+        pop_registers
         rti
 .endproc
 
@@ -170,8 +173,6 @@ hi_2: .res 1
 .endproc
 
 .proc clear_background
-        push_registers
-
         ldy #$00                ; tile number
 
         lda #$20                ; start high memory address
@@ -208,14 +209,12 @@ hi_2: .res 1
         cmp hi_2
         bne @loop
 
-        pop_registers
         rts
 .endproc
 
 .import read_joypad
 
 .proc draw_player
-        push_registers
         ; tile numbers
         lda #$05
         sta $0201
@@ -261,27 +260,22 @@ hi_2: .res 1
         adc #$08
         sta $020f
 
-        pop_registers
         rts
 .endproc
 
 .proc update_player
-        push_registers
-
         lda joypad_1
         and #PAD_U
         beq :+
         dec player_y
         dec player_y
         :
-
         lda joypad_1
         and #PAD_D
         beq :+
         inc player_y
         inc player_y
         :
-
         lda joypad_1
         and #PAD_L
         beq :+
@@ -294,9 +288,6 @@ hi_2: .res 1
         inc player_x
         inc player_x
         :
-
-exit_subroutine:
-        pop_registers
         rts
 .endproc
 
