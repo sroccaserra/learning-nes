@@ -265,6 +265,8 @@ hi_2: .res 1
         rts
 .endproc
 
+; position de l'objet
+; tuiles de l'objet
 .proc draw_meta_tile
         ; moon
         ldy #$00
@@ -274,12 +276,10 @@ hi_2: .res 1
         sta PPUADDR
         sty PPUADDR
 
-        ldx #0
-        lda moon,X
-        sta PPUDATA
+        ldx moon
+        stx PPUDATA
         inx
-        lda moon,X
-        sta PPUDATA
+        stx PPUDATA
 
         tya
         clc
@@ -292,11 +292,9 @@ hi_2: .res 1
         sty PPUADDR
 
         inx
-        lda moon,X
-        sta PPUDATA
+        stx PPUDATA
         inx
-        lda moon,X
-        sta PPUDATA
+        stx PPUDATA
 
         rts
 .endproc
@@ -318,7 +316,7 @@ palettes:
 .byte $0f, $19, $09, $29
 
 moon:
-.byte $32, $33, $34, $35
+.byte $32
 
 small_stars_pos:                ; null terminated, PPU addresses
 .dbyt $212d, $237b, $22b4, $2186
