@@ -71,31 +71,14 @@ hi_2: .res 1
         bne @load_palettes
 
         jsr clear_background
-        ldx moon
+
+        ldx #moon
+        ldy #$00
         jsr draw_meta_tile
 
-        ; big star
-        lda PPUSTATUS           ; first row starting at $2090
-        lda #$20
-        sta PPUADDR
-        lda #$90
-        sta PPUADDR
-
-        lda #$29
-        sta PPUDATA
-        lda #$2a
-        sta PPUDATA
-
-        lda PPUSTATUS           ; second row starting at $20b0
-        lda #$20
-        sta PPUADDR
-        lda #$b0
-        sta PPUADDR
-
-        lda #$2b
-        sta PPUDATA
-        lda #$2c
-        sta PPUDATA
+        ldx #big_star
+        ldy #$90
+        jsr draw_meta_tile
 
         ldy #$2d
         ldx #0
@@ -268,8 +251,7 @@ hi_2: .res 1
 
 ; position de l'objet
 ; tuiles de l'objet
-.proc draw_meta_tile ; x: first tile index
-        ldy #$00
+.proc draw_meta_tile ; x: first tile index, y: x coordinate
 
         lda PPUSTATUS           ; first row starting at $2000
         lda #$20
@@ -314,8 +296,8 @@ palettes:
 .byte $0f, $19, $09, $29
 .byte $0f, $19, $09, $29
 
-moon:
-.byte $32
+moon = $32
+big_star = $29
 
 small_stars_pos:                ; null terminated, PPU addresses
 .dbyt $212d, $237b, $22b4, $2186
