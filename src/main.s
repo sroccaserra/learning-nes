@@ -71,33 +71,7 @@ hi_2: .res 1
         bne @load_palettes
 
         jsr clear_background
-
-        ; moon
-        lda PPUSTATUS           ; first row starting at $2000
-        lda #$20
-        sta PPUADDR
-        lda #$00
-        sta PPUADDR
-
-        ldx #0
-        lda moon,X
-        sta PPUDATA
-        inx
-        lda moon,X
-        sta PPUDATA
-
-        lda PPUSTATUS           ; second row starting at $2020
-        lda #$20
-        sta PPUADDR
-        lda #$20
-        sta PPUADDR
-
-        inx
-        lda moon,X
-        sta PPUDATA
-        inx
-        lda moon,X
-        sta PPUDATA
+        jsr draw_meta_tile
 
         ; big star
         lda PPUSTATUS           ; first row starting at $2090
@@ -288,6 +262,42 @@ hi_2: .res 1
         inc player_x
         inc player_x
         :
+        rts
+.endproc
+
+.proc draw_meta_tile
+        ; moon
+        ldy #$00
+
+        lda PPUSTATUS           ; first row starting at $2000
+        lda #$20
+        sta PPUADDR
+        sty PPUADDR
+
+        ldx #0
+        lda moon,X
+        sta PPUDATA
+        inx
+        lda moon,X
+        sta PPUDATA
+
+        tya
+        clc
+        adc #$20
+        tay
+
+        lda PPUSTATUS           ; second row starting at $2020
+        lda #$20
+        sta PPUADDR
+        sty PPUADDR
+
+        inx
+        lda moon,X
+        sta PPUDATA
+        inx
+        lda moon,X
+        sta PPUDATA
+
         rts
 .endproc
 
