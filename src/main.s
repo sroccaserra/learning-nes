@@ -71,6 +71,7 @@ hi_2: .res 1
         bne @load_palettes
 
         jsr clear_background
+        ldx moon
         jsr draw_meta_tile
 
         ; big star
@@ -267,8 +268,7 @@ hi_2: .res 1
 
 ; position de l'objet
 ; tuiles de l'objet
-.proc draw_meta_tile
-        ; moon
+.proc draw_meta_tile ; x: first tile index
         ldy #$00
 
         lda PPUSTATUS           ; first row starting at $2000
@@ -276,7 +276,6 @@ hi_2: .res 1
         sta PPUADDR
         sty PPUADDR
 
-        ldx moon
         stx PPUDATA
         inx
         stx PPUDATA
