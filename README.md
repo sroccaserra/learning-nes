@@ -119,6 +119,16 @@ Divide a 16 bit number by 2:
   ROR num1_low
 ```
 
+#### 6502 Addressing modes
+
+The indirect indexed addressing mode `(indirect),y` is useful for array
+processing. The 8-bit Y register is added to a 16-bit base address read from
+zero page. This mode is only used with the Y register.
+
+The indexed indirect addressing mode `(indirect,x)` is less frequently used. It
+wraps around to a zero page address. This mode is only used with the X
+register.
+
 ### References
 
 #### Introductions
@@ -129,10 +139,12 @@ Divide a 16 bit number by 2:
 
 #### 6502
 
+- MOS Technology 6502 ~ <https://fr.wikipedia.org/wiki/MOS_Technology_6502>
 - NMOS 6502 Opcodes ~ <http://www.6502.org/tutorials/6502opcodes.html>
 - 6502 Microprocessor ~ <https://www.zophar.net/fileuploads/2/10532krzvs/6502.txt>
 - 6502 Instruction Set ~ <https://www.masswerk.at/6502/6502_instruction_set.html>
 - Beyond 8-bit Unsigned Comparisons ~ <http://www.6502.org/tutorials/compare_beyond.html>
+- 6502 Addressing Modes ~ <http://www.emulator101.com/6502-addressing-modes.html>
 
 #### NES
 
