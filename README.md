@@ -21,6 +21,53 @@ CPU).
 - PPU nametables ~ <https://wiki.nesdev.org/w/index.php/PPU_nametables>
 - PPU attribute tables ~ <https://wiki.nesdev.org/w/index.php?title=PPU_attribute_tables>
 
+**Fill a whole screen of tiles**
+
+See : <https://www.youtube.com/watch?v=CyxznT1JgBg>
+
+If we have a list of 960 tile indexes (a byte = a tile index) at the ROM
+address `WorldData`, using the 2 bytes zero page `world` variable we can load
+them to the PPU like so:
+
+```s
+    lda #<WorldData     ; low byte of the WorldData ROM address
+    sta world
+    lda #>WorldData     ; high byte of the WorldData ROM address
+    sta world+1
+
+    bit PPUSTATUS       ; latch
+    lda #$20            ; first screen at $2000 (PPU address)
+    sta PPUADDR
+    lda #$00
+    sta PPUADDR
+
+    ldx #$00
+    ldy #$00
+@load_world:
+    lda (world),y
+    sta PPUDATA
+    iny
+    cpx #$03            ; we stop when we reach 960, i.e. when x = $03 and y = $c0
+    bne :+
+    cpy #$c0
+    beq @done_loading_world
+:
+    cpy #$00
+    bne @load_world
+    inx                 ; a whole row has been loaded, we increment x
+    inc world+1         ; increment high byte
+    jmp @load_world     ; and proceed to fill the next row
+@done_loading_world:
+
+    ldx #$00
+@set_attributes:
+    lda #$55
+    sta PPUDATA
+    inx
+    cpx #64             ; we set the same value for the 64 attributes of the first screen
+    bne @set_attributes
+```
+
 #### ca65
 
 The .word and .addr commands defines word sized data in little-endian format.
