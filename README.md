@@ -203,9 +203,12 @@ register.
 - PPU registers - PPUMASK ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#PPUMASK>
 - PPU registers - PPUSTATUS ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#PPUSTATUS>
 - PPU registers - OAMDMA ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#OAMDMA>
+- PPU rendering ~ <https://wiki.nesdev.org/w/index.php?title=PPU_rendering>
 - PPU nametables ~ <https://wiki.nesdev.org/w/index.php/PPU_nametables>
+- Mirroring ~ <https://wiki.nesdev.org/w/index.php?title=Mirroring>
 - PPU attribute tables ~ <https://wiki.nesdev.org/w/index.php?title=PPU_attribute_tables>
 - PPU palettes ~ <https://wiki.nesdev.org/w/index.php/PPU_palettes>
+- PPU scrolling ~ <https://wiki.nesdev.org/w/index.php/PPU_scrolling>
 - NMI thread ~ <https://wiki.nesdev.org/w/index.php/NMI_thread>
 - The frame and NMIs ~ <https://wiki.nesdev.org/w/index.php?title=The_frame_and_NMIs>
 
