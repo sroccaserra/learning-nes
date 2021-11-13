@@ -3,7 +3,7 @@
 .include "constants.inc"
 
 .segment "ZEROPAGE"
-.importzp player_x, player_y, scroll_y, joypad_1
+.importzp player_x, player_y, nametable, scroll_y, ppu_ctrl, joypad_1
 
 .segment "CODE"
 
@@ -15,6 +15,7 @@
         cld                     ; clear decimal mode bit
         ldx #$00
         stx PPUCTRL             ; turn off non maskable interrupts (NMI)
+        stx ppu_ctrl
         stx PPUMASK             ; disable rendering
 
         ; disable sound
@@ -37,6 +38,7 @@
         inx
         bne @clear_oam
 
+        ; init variables
         lda #128
         sta player_x
         lda #160
@@ -44,6 +46,7 @@
         lda #0
         sta scroll_y
         sta joypad_1
+        sta nametable
 
 @waitvb2:
         bit PPUSTATUS

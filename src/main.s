@@ -10,8 +10,10 @@
 player_x: .res 1
 player_y: .res 1
 player_dir: .res 1
+nametable: .res 1
 scroll_y: .res 1
-.exportzp player_x, player_y, scroll_y
+ppu_ctrl: .res 1
+.exportzp player_x, player_y, nametable, scroll_y, ppu_ctrl
 
 joypad_1: .res 1
 .exportzp joypad_1
@@ -35,11 +37,31 @@ hi_2: .res 1
         dec scroll_y
         lda scroll_y
         cmp #MAX_Y
-        bcc :+
+        bcc @skip
         lda #MAX_Y
         sta scroll_y
+        lda nametable
+        cmp #0
+        bne :+
+        ; if nametable is zero
+        lda #1
+        sta nametable
+        lda ppu_ctrl
+        and #%11111100
+        ora #%00000010          ; set nametable to $2800
+        sta ppu_ctrl
+        sta PPUCTRL
+        jmp @skip
         :
+        ; else
+        lda #0
+        sta nametable
+        lda ppu_ctrl
+        and #%11111100          ; set nametable to $2000
+        sta ppu_ctrl
+        sta PPUCTRL
 
+@skip:
         lda #$00
         sta PPUSCROLL
         lda scroll_y
@@ -118,6 +140,7 @@ hi_2: .res 1
 
         lda #%10010000
         sta PPUCTRL             ; turn on NMIs, sprites use first pattern table
+        sta ppu_ctrl
 
         lda #%00011110
         sta PPUMASK             ; enable rendering

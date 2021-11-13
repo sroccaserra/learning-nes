@@ -199,6 +199,7 @@ register.
 - NROM ~ <https://wiki.nesdev.org/w/index.php?title=NROM>
 - Programming NROM ~ <https://wiki.nesdev.org/w/index.php?title=Programming_NROM>
 - CPU memory map ~ <https://wiki.nesdev.org/w/index.php?title=CPU_memory_map>
+- PPU programmer reference ~ <https://wiki.nesdev.org/w/index.php/PPU_programmer_reference>
 - PPU registers - PPUCTRL ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#PPUCTRL>
 - PPU registers - PPUMASK ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#PPUMASK>
 - PPU registers - PPUSTATUS ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#PPUSTATUS>
