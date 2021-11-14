@@ -317,6 +317,8 @@ big_star = $29
 small_stars_pos:                ; null terminated, PPU addresses
 .dbyt $212d, $237b, $22b4, $2186
 .dbyt $2059, $2289, $2087, $238c
+.dbyt $2859, $2a89, $2887, $2b8c
+.dbyt $292d, $2b7b, $2ab4, $2986
 .byte $00
 
 .segment "CHR"
