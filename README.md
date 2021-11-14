@@ -215,17 +215,10 @@ Nesdev:
 - NMI thread ~ <https://wiki.nesdev.org/w/index.php/NMI_thread>
 - The frame and NMIs ~ <https://wiki.nesdev.org/w/index.php?title=The_frame_and_NMIs>
 
-ChibiAkumas (with lots of other 6502-based platforms resources):
-
-- [6502 Assembly programming for the Nintendo Entertainment System (NES) and Famicom][nesfamicom]
-- [Platform Specific Lessons][platform]
-
-[nesfamicom]: https://www.chibiakumas.com/6502/nesfamicom.php
-[platform]: https://www.chibiakumas.com/6502/platform5.php
-
 Misc:
 
 - NES Hardware Specifications ~ <https://problemkaputt.de/everynes.htm#techdata>
+- NES PPU Notes ~ <https://github.com/pjhades/tolarian-academy/blob/master/nes-ppu.md>
 
 #### Code
 
@@ -234,6 +227,13 @@ Misc:
 - smbdis.asm - A comprehensive Super Mario Bros. disassembly ~ <https://gist.github.com/1wert3r/4048722>
 - Disassembly by doppelganger ~ <https://6502disassembly.com/nes-smb/SuperMarioBros.html>
 - SMB Disassembly CC65 ~ <https://github.com/threecreepio/smb-disassembly>
+- ChibiAkumas ~ [6502 Assembly programming for the Nintendo Entertainment System (NES) and Famicom][nesfamicom]
+- ChibiAkumas ~ [Platform Specific Lessons][platform]
+
+Note: ChibiAkumas has lots of other 6502-based platforms resources, and other 8 bit & 16 bit platforms resources.
+
+[nesfamicom]: https://www.chibiakumas.com/6502/nesfamicom.php
+[platform]: https://www.chibiakumas.com/6502/platform5.php
 
 #### Tools
 
