@@ -25,5 +25,8 @@ $(FCEUX_BOOKMARKS): $(ROM)
 $(FCEUX_DEBUG_MARKERS): $(ROM)
 	bash generate_debug_markers.sh $(SYMBOLS) > $(FCEUX_DEBUG_MARKERS)
 
+watch:
+	fswatch -o -e '.*' -i '\.s$$' -i '\.inc$$' -i '\.chr$$' src | while read ; do make ; echo '----' ; done
+
 clean:
 	rm -f **/*.o *.nes *.dbg *.nl
