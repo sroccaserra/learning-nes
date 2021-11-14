@@ -1,5 +1,7 @@
 ; vim: set filetype=asmM6502:
 
+.MACPACK generic
+
 .include "constants.inc"
 .include "header.inc"
 .include "macros.inc"
@@ -37,12 +39,11 @@ hi_2: .res 1
         dec scroll_y
         lda scroll_y
         cmp #MAX_Y
-        bcc @write_scroll_values
+        blt @write_scroll_values
         lda #MAX_Y
         sta scroll_y
         lda nametable_index
-        cmp #$00
-        bne @nametable_index_is_01
+        bnz @nametable_index_is_01
         lda #$01
         sta nametable_index
         lda ppu_ctrl
@@ -104,7 +105,7 @@ hi_2: .res 1
 @small_stars:
         lda PPUSTATUS
         lda small_stars_pos,X
-        beq @end_small_stars
+        bze @end_small_stars
         sta PPUADDR
         inx
         lda small_stars_pos,X
@@ -172,9 +173,8 @@ hi_2: .res 1
 @loop:  ; load values to PPU
         sty PPUDATA
         ; arithmetics
-        clc
         lda lo_1
-        adc #1
+        add #1
         sta lo_1
         lda hi_1
         adc #0
@@ -218,24 +218,20 @@ hi_2: .res 1
         lda player_y
         sta $0204
         lda player_x
-        clc
-        adc #$08
+        add #$08
         sta $0207
 
         lda player_y
-        clc
-        adc #$08
+        add #$08
         sta $0208
         lda player_x
         sta $020b
 
         lda player_y
-        clc
-        adc #$08
+        add #$08
         sta $020c
         lda player_x
-        clc
-        adc #$08
+        add #$08
         sta $020f
 
         rts
@@ -244,25 +240,25 @@ hi_2: .res 1
 .proc update_player
         lda joypad_1
         and #PAD_U
-        beq :+
+        bze :+
         dec player_y
         dec player_y
         :
         lda joypad_1
         and #PAD_D
-        beq :+
+        bze :+
         inc player_y
         inc player_y
         :
         lda joypad_1
         and #PAD_L
-        beq :+
+        bze :+
         dec player_x
         dec player_x
         :
         lda joypad_1
         and #PAD_R
-        beq :+
+        bze :+
         inc player_x
         inc player_x
         :
@@ -283,8 +279,7 @@ hi_2: .res 1
         stx PPUDATA
 
         tya
-        clc
-        adc #$20
+        add #$20
         tay
 
         lda PPUSTATUS           ; second row starting at $2020
