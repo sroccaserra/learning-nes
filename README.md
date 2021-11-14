@@ -195,6 +195,8 @@ register.
 
 #### NES
 
+Nesdev:
+
 - Nesdev Wiki ~ <https://wiki.nesdev.org/w/index.php/Nesdev_Wiki>
 - NROM ~ <https://wiki.nesdev.org/w/index.php?title=NROM>
 - Programming NROM ~ <https://wiki.nesdev.org/w/index.php?title=Programming_NROM>
@@ -212,6 +214,18 @@ register.
 - PPU scrolling ~ <https://wiki.nesdev.org/w/index.php/PPU_scrolling>
 - NMI thread ~ <https://wiki.nesdev.org/w/index.php/NMI_thread>
 - The frame and NMIs ~ <https://wiki.nesdev.org/w/index.php?title=The_frame_and_NMIs>
+
+ChibiAkumas (with lots of other 6502-based platforms resources):
+
+- [6502 Assembly programming for the Nintendo Entertainment System (NES) and Famicom][nesfamicom]
+- [Platform Specific Lessons][platform]
+
+[nesfamicom]: https://www.chibiakumas.com/6502/nesfamicom.php
+[platform]: https://www.chibiakumas.com/6502/platform5.php
+
+Misc:
+
+- NES Hardware Specifications ~ <https://problemkaputt.de/everynes.htm#techdata>
 
 #### Code
 
