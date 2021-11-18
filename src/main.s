@@ -98,6 +98,8 @@ hi_2: .res 1
 
         lda #moon
         sta p_1
+        lda #$02
+        sta p_2
         lda #$20
         sta hi_1
         lda #$00
@@ -290,36 +292,35 @@ hi_2: .res 1
 .endproc
 
 ; p_1: first tile index
+; p_2: nb lines of the meta tiles
 ; lo_1: low byte of destination address
 ; hi_1: high byte of destination address
 .proc draw_meta_tile
+        ldx p_1
+        ldy p_2
+@loop:
         lda PPUSTATUS           ; first row starting at hi_1 lo_1
-        ldy hi_1
-        sty PPUADDR
+        lda hi_1
+        sta PPUADDR
         lda lo_1
         sta PPUADDR
 
-        ldx p_1
         stx PPUDATA
         inx
         stx PPUDATA
+        inx
+
+        dey
+        bze @end
 
         add #$20
         sta lo_1
-        tya
+        lda hi_1
         adc #0
-        tay
+        sta hi_1
 
-        lda PPUSTATUS           ; second row starting at hi_1 lo_1 + $20
-        sty PPUADDR
-        lda lo_1
-        sta PPUADDR
-
-        inx
-        stx PPUDATA
-        inx
-        stx PPUDATA
-
+        jmp @loop
+@end:
         rts
 .endproc
 
