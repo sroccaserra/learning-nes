@@ -3,7 +3,7 @@
 .include "constants.inc"
 
 .segment "ZEROPAGE"
-.importzp player_x, player_y, nametable_index, scroll_y, ppu_ctrl, joypad_1
+.importzp player_x, player_y, scroll_y, ppu_ctrl, joypad_1
 
 .segment "CODE"
 
@@ -46,7 +46,6 @@
         lda #0
         sta scroll_y
         sta joypad_1
-        sta nametable_index
 
 @waitvb2:
         bit PPUSTATUS

@@ -12,10 +12,9 @@
 player_x: .res 1
 player_y: .res 1
 player_dir: .res 1
-nametable_index: .res 1
 scroll_y: .res 1
 ppu_ctrl: .res 1
-.exportzp player_x, player_y, nametable_index, scroll_y, ppu_ctrl
+.exportzp player_x, player_y, scroll_y, ppu_ctrl
 
 joypad_1: .res 1
 .exportzp joypad_1
@@ -46,21 +45,8 @@ hi_2: .res 1
         blt @write_scroll_values
         lda #MAX_Y
         sta scroll_y
-        lda nametable_index
-        bnz @nametable_index_is_01
-        lda #$01
-        sta nametable_index
         lda ppu_ctrl
-        and #%11111100
-        ora #%00000010          ; set nametable to $2800 (%10)
-        sta ppu_ctrl
-        sta PPUCTRL
-        jmp @write_scroll_values
-@nametable_index_is_01:
-        lda #$00
-        sta nametable_index
-        lda ppu_ctrl
-        and #%11111100          ; set nametable to $2000 (%00)
+        eor #%00000010          ; switch nametable between $2000 (%00) and  $2800 (%10)
         sta ppu_ctrl
         sta PPUCTRL
 @write_scroll_values:

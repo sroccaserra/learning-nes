@@ -1,7 +1,6 @@
 ; vim: set filetype=asmM6502:
 
 .macro push_registers
-        php
         pha
         txa
         pha
@@ -15,5 +14,4 @@
         pla
         tax
         pla
-        plp
 .endmacro
