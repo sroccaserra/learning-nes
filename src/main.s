@@ -20,7 +20,11 @@ ppu_ctrl: .res 1
 joypad_1: .res 1
 .exportzp joypad_1
 
-; temp variables for various arithmetics
+; temp variables
+p_1: .res 1
+p_2: .res 1
+
+; temp variables for 16 bit values
 lo_1: .res 1
 hi_1: .res 1
 lo_2: .res 1
@@ -92,12 +96,32 @@ hi_2: .res 1
 
         jsr clear_background
 
-        ldx #moon
-        ldy #$00
+        lda #moon
+        sta p_1
+        lda #$20
+        sta hi_1
+        lda #$00
+        sta lo_1
         jsr draw_meta_tile
 
-        ldx #big_star
-        ldy #$90
+        lda #$28
+        sta hi_1
+        lda #$16
+        sta lo_1
+        jsr draw_meta_tile
+
+        lda #big_star
+        sta p_1
+        lda #$21
+        sta hi_1
+        lda #$90
+        sta lo_1
+        jsr draw_meta_tile
+
+        lda #$29
+        sta hi_1
+        lda #$C6
+        sta lo_1
         jsr draw_meta_tile
 
         ldy #$2d
@@ -265,27 +289,31 @@ hi_2: .res 1
         rts
 .endproc
 
-; position de l'objet
-; tuiles de l'objet
-.proc draw_meta_tile ; x: first tile index, y: x coordinate
-
-        lda PPUSTATUS           ; first row starting at $2000
-        lda #$20
-        sta PPUADDR
+; p_1: first tile index
+; lo_1: low byte of destination address
+; hi_1: high byte of destination address
+.proc draw_meta_tile
+        lda PPUSTATUS           ; first row starting at hi_1 lo_1
+        ldy hi_1
         sty PPUADDR
+        lda lo_1
+        sta PPUADDR
 
+        ldx p_1
         stx PPUDATA
         inx
         stx PPUDATA
 
-        tya
         add #$20
+        sta lo_1
+        tya
+        adc #0
         tay
 
-        lda PPUSTATUS           ; second row starting at $2020
-        lda #$20
-        sta PPUADDR
+        lda PPUSTATUS           ; second row starting at hi_1 lo_1 + $20
         sty PPUADDR
+        lda lo_1
+        sta PPUADDR
 
         inx
         stx PPUDATA
