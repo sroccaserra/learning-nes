@@ -98,13 +98,11 @@
 
 @loop:  ; load values to PPU
         sty PPUDATA
-        ; arithmetics
-        lda lo_1
-        add #1
-        sta lo_1
-        lda hi_1
-        adc #0
-        sta hi_1
+        ; 16 bit arithmetics
+        inc lo_1
+        bnz :+
+        inc hi_1
+        :
         ; compare
         lda lo_1
         cmp lo_2
