@@ -39,18 +39,17 @@ hi_2: .res 1
         sta OAMDMA
 
         jsr draw_player
-        dec scroll_y
         lda scroll_y
-        cmp #MAX_Y
-        blt @write_scroll_values
-        lda #MAX_Y
+        bnz @do_scroll
+        lda #Y_RESOLUTION
         sta scroll_y
         lda ppu_ctrl
         eor #%00000010          ; switch nametable between $2000 (%00) and  $2800 (%10)
         sta ppu_ctrl
         sta PPUCTRL
-@write_scroll_values:
-        lda #$00
+@do_scroll:
+        dec scroll_y
+        lda #$00                ; scroll x is 0
         sta PPUSCROLL
         lda scroll_y
         sta PPUSCROLL

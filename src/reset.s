@@ -43,7 +43,7 @@
         sta player_x
         lda #160
         sta player_y
-        lda #0
+        lda #$00
         sta scroll_y
         sta joypad_1
 
