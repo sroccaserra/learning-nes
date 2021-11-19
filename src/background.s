@@ -4,7 +4,7 @@
 
 .include "constants.inc"
 
-.importzp p_1, p_2, lo_1, lo_2, hi_1, hi_2
+.importzp p_1, p_2, p_3, v_1, lo_1, lo_2, hi_1, hi_2
 
 .segment "CODE"
 
@@ -14,8 +14,10 @@
 
         lda #moon
         sta p_1
-        lda #$02
+        lda #02
         sta p_2
+        lda #02
+        sta p_3
         lda #$20
         sta hi_1
         lda #$00
@@ -56,6 +58,17 @@
         sty PPUDATA
         jmp @small_stars
 @end_small_stars:
+
+        ; OCTO logo
+        lda #$40
+        sta p_1
+        lda #08
+        sta p_2
+        lda #$20
+        sta hi_1
+        lda #$6c
+        sta lo_1
+        jsr draw_meta_tile
 
         ; finally, attribute table
         lda PPUSTATUS
@@ -115,12 +128,15 @@
 .endproc
 
 ; p_1: first tile index
-; p_2: nb lines of the meta tiles
+; p_2: width of the meta tile
+; p_3: nb lines of the meta tiles
 ; lo_1: low byte of destination address
 ; hi_1: high byte of destination address
 .proc draw_meta_tile
         ldx p_1
-        ldy p_2
+        lda p_2
+        sta v_1
+        ldy p_3
 @loop:
         lda PPUSTATUS           ; first row starting at hi_1 lo_1
         lda hi_1
@@ -128,14 +144,18 @@
         lda lo_1
         sta PPUADDR
 
+        :
         stx PPUDATA
         inx
-        stx PPUDATA
-        inx
+        dec v_1
+        bnz :-
 
+        lda p_2
+        sta v_1
         dey
         bze @end
 
+        lda lo_1
         add #$20
         sta lo_1
         lda hi_1

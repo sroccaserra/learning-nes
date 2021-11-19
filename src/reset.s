@@ -39,7 +39,7 @@
         bne @clear_oam
 
         ; init variables
-        lda #128
+        lda #120
         sta player_x
         lda #160
         sta player_y

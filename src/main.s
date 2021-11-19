@@ -22,12 +22,17 @@ ppu_ctrl: .res 1
 joypad_1: .res 1
 .exportzp joypad_1
 
-; temp variables
+; parmeters
 p_1: .res 1
 p_2: .res 1
-.exportzp p_1, p_2
+p_3: .res 1
+.exportzp p_1, p_2, p_3
 
-; temp variables for 16 bit values
+; temp variables
+v_1: .res 1
+.exportzp v_1
+
+; temp variables / params for 16 bit values
 lo_1: .res 1
 hi_1: .res 1
 lo_2: .res 1
