@@ -192,6 +192,11 @@ register.
 - 6502 Instruction Set ~ <https://www.masswerk.at/6502/6502_instruction_set.html>
 - Beyond 8-bit Unsigned Comparisons ~ <http://www.6502.org/tutorials/compare_beyond.html>
 - 6502 Addressing Modes ~ <http://www.emulator101.com/6502-addressing-modes.html>
+- The Overflow (V) Flag Explained ~ <http://6502.org/tutorials/vflag.html>
+- Parameter-passing methods ~ <http://wilsonminesco.com/stacks/parampassing.html>
+- Tips For Programming the 65(c)02 ~ <http://wilsonminesco.com/6502primer/PgmTips.html>
+- 16 bit increment and decrement ~ <https://wiki.nesdev.org/w/index.php/Synthetic_instructions#16-bit_increment_and_decrement>
+- Program structures with macros ~ <http://wilsonminesco.com/StructureMacros/index.html#list>
 
 #### NES
 
