@@ -13,6 +13,8 @@
 .proc reset_handler
         sei                     ; set interrupt ignore bit
         cld                     ; clear decimal mode bit
+        ldx #$ff
+        txs                     ; reset stack
         ldx #$00
         stx PPUCTRL             ; turn off non maskable interrupts (NMI)
         stx ppu_ctrl
