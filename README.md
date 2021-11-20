@@ -1,5 +1,98 @@
 ![Screen](images/Screen.png?raw=true)
 
+### References
+
+#### Introductions
+
+- Famicom Party ~ <https://famicom.party/book>
+- Game Development in Eight Bits ~ <https://www.youtube.com/watch?v=TPbroUDHG0s>
+- Nerdy Nights ~ <https://taywee.github.io/NerdyNights/nerdynights.html>
+
+#### 6502 References
+
+- MOS Technology 6502 ~ <https://fr.wikipedia.org/wiki/MOS_Technology_6502>
+
+6502.org:
+
+- NMOS 6502 Opcodes ~ <http://www.6502.org/tutorials/6502opcodes.html>
+- Beyond 8-bit Unsigned Comparisons ~ <http://www.6502.org/tutorials/compare_beyond.html>
+- The Overflow (V) Flag Explained ~ <http://6502.org/tutorials/vflag.html>
+
+Wilson Mines Co.:
+
+- Home ~ <http://wilsonminesco.com/>
+- Tips For Programming the 65(c)02 ~ <http://wilsonminesco.com/6502primer/PgmTips.html>
+- Parameter-passing methods ~ <http://wilsonminesco.com/stacks/parampassing.html>
+- Program structures with macros ~ <http://wilsonminesco.com/StructureMacros/index.html#list>
+- 6502 stacks treatise ~ <http://wilsonminesco.com/stacks/>
+
+Nesdev:
+
+- 16 bit increment and decrement ~ <https://wiki.nesdev.org/w/index.php/Synthetic_instructions#16-bit_increment_and_decrement>
+- Stack ~ <https://wiki.nesdev.org/w/index.php?title=Stack>
+
+Misc:
+
+- 6502 Microprocessor ~ <https://www.zophar.net/fileuploads/2/10532krzvs/6502.txt>
+- 6502 Instruction Set ~ <https://www.masswerk.at/6502/6502_instruction_set.html>
+- 6502 Addressing Modes ~ <http://www.emulator101.com/6502-addressing-modes.html>
+
+#### NES
+
+Nesdev:
+
+- Nesdev Wiki ~ <https://wiki.nesdev.org/w/index.php/Nesdev_Wiki>
+- NROM ~ <https://wiki.nesdev.org/w/index.php?title=NROM>
+- Programming NROM ~ <https://wiki.nesdev.org/w/index.php?title=Programming_NROM>
+- CPU memory map ~ <https://wiki.nesdev.org/w/index.php?title=CPU_memory_map>
+- PPU programmer reference ~ <https://wiki.nesdev.org/w/index.php/PPU_programmer_reference>
+- PPU registers - PPUCTRL ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#PPUCTRL>
+- PPU registers - PPUMASK ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#PPUMASK>
+- PPU registers - PPUSTATUS ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#PPUSTATUS>
+- PPU registers - OAMDMA ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#OAMDMA>
+- PPU rendering ~ <https://wiki.nesdev.org/w/index.php?title=PPU_rendering>
+- PPU nametables ~ <https://wiki.nesdev.org/w/index.php/PPU_nametables>
+- Mirroring ~ <https://wiki.nesdev.org/w/index.php?title=Mirroring>
+- PPU attribute tables ~ <https://wiki.nesdev.org/w/index.php?title=PPU_attribute_tables>
+- PPU palettes ~ <https://wiki.nesdev.org/w/index.php/PPU_palettes>
+- PPU scrolling ~ <https://wiki.nesdev.org/w/index.php/PPU_scrolling>
+- NMI thread ~ <https://wiki.nesdev.org/w/index.php/NMI_thread>
+- The frame and NMIs ~ <https://wiki.nesdev.org/w/index.php?title=The_frame_and_NMIs>
+
+Misc:
+
+- NES Hardware Specifications ~ <https://problemkaputt.de/everynes.htm#techdata>
+- NES PPU Notes ~ <https://github.com/pjhades/tolarian-academy/blob/master/nes-ppu.md>
+
+#### Code
+
+- Minimal NES example using ca65 ~ <https://github.com/bbbradsmith/NES-ca65-example>
+- NES Programming ~ <https://www.youtube.com/playlist?list=PL29OkqO3wUxyF9BsTAgZkmCEVtC77rgff>
+- smbdis.asm - A comprehensive Super Mario Bros. disassembly ~ <https://gist.github.com/1wert3r/4048722>
+- Disassembly by doppelganger ~ <https://6502disassembly.com/nes-smb/SuperMarioBros.html>
+- SMB Disassembly CC65 ~ <https://github.com/threecreepio/smb-disassembly>
+- ChibiAkumas ~ [6502 Assembly programming for the Nintendo Entertainment System (NES) and Famicom][nesfamicom]
+- ChibiAkumas ~ [Platform Specific Lessons][platform]
+
+Note: ChibiAkumas has lots of other 6502-based platforms resources, and other 8 bit & 16 bit platforms resources.
+
+[nesfamicom]: https://www.chibiakumas.com/6502/nesfamicom.php
+[platform]: https://www.chibiakumas.com/6502/platform5.php
+
+#### Tools
+
+- cc65 Documentation Overview ~ <https://cc65.github.io/doc/>
+- ca65 Users Guide ~ <https://cc65.github.io/doc/ca65.html>
+- FCEUX Help - Debugger ~ <https://fceux.com/web/help/Debugger.html>
+
+#### For future reference
+
+- CHR ROM vs. CHR RAM ~ <https://wiki.nesdev.org/w/index.php?title=CHR_ROM_vs._CHR_RAM#Switching_to_CHR_RAM>
+- UxROM ~ <https://wiki.nesdev.org/w/index.php?title=UxROM>
+- Programming UNROM ~ <https://wiki.nesdev.org/w/index.php?title=Programming_UNROM>
+- MMC1 ~ <https://wiki.nesdev.org/w/index.php?title=MMC1>
+- Programming MMC1 ~ <https://wiki.nesdev.org/w/index.php?title=Programming_MMC1>
+
 ### Learnings
 
 #### PPU
@@ -176,80 +269,3 @@ The indexed indirect addressing mode `(indirect,x)` is less frequently used. It
 wraps around to a zero page address. This mode is only used with the X
 register.
 
-### References
-
-#### Introductions
-
-- Famicom Party ~ <https://famicom.party/book>
-- Game Development in Eight Bits ~ <https://www.youtube.com/watch?v=TPbroUDHG0s>
-- Nerdy Nights ~ <https://taywee.github.io/NerdyNights/nerdynights.html>
-
-#### 6502
-
-- MOS Technology 6502 ~ <https://fr.wikipedia.org/wiki/MOS_Technology_6502>
-- NMOS 6502 Opcodes ~ <http://www.6502.org/tutorials/6502opcodes.html>
-- 6502 Microprocessor ~ <https://www.zophar.net/fileuploads/2/10532krzvs/6502.txt>
-- 6502 Instruction Set ~ <https://www.masswerk.at/6502/6502_instruction_set.html>
-- Beyond 8-bit Unsigned Comparisons ~ <http://www.6502.org/tutorials/compare_beyond.html>
-- 6502 Addressing Modes ~ <http://www.emulator101.com/6502-addressing-modes.html>
-- The Overflow (V) Flag Explained ~ <http://6502.org/tutorials/vflag.html>
-- Parameter-passing methods ~ <http://wilsonminesco.com/stacks/parampassing.html>
-- Tips For Programming the 65(c)02 ~ <http://wilsonminesco.com/6502primer/PgmTips.html>
-- 16 bit increment and decrement ~ <https://wiki.nesdev.org/w/index.php/Synthetic_instructions#16-bit_increment_and_decrement>
-- Program structures with macros ~ <http://wilsonminesco.com/StructureMacros/index.html#list>
-
-#### NES
-
-Nesdev:
-
-- Nesdev Wiki ~ <https://wiki.nesdev.org/w/index.php/Nesdev_Wiki>
-- NROM ~ <https://wiki.nesdev.org/w/index.php?title=NROM>
-- Programming NROM ~ <https://wiki.nesdev.org/w/index.php?title=Programming_NROM>
-- CPU memory map ~ <https://wiki.nesdev.org/w/index.php?title=CPU_memory_map>
-- PPU programmer reference ~ <https://wiki.nesdev.org/w/index.php/PPU_programmer_reference>
-- PPU registers - PPUCTRL ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#PPUCTRL>
-- PPU registers - PPUMASK ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#PPUMASK>
-- PPU registers - PPUSTATUS ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#PPUSTATUS>
-- PPU registers - OAMDMA ~ <https://wiki.nesdev.org/w/index.php?title=PPU_registers#OAMDMA>
-- PPU rendering ~ <https://wiki.nesdev.org/w/index.php?title=PPU_rendering>
-- PPU nametables ~ <https://wiki.nesdev.org/w/index.php/PPU_nametables>
-- Mirroring ~ <https://wiki.nesdev.org/w/index.php?title=Mirroring>
-- PPU attribute tables ~ <https://wiki.nesdev.org/w/index.php?title=PPU_attribute_tables>
-- PPU palettes ~ <https://wiki.nesdev.org/w/index.php/PPU_palettes>
-- PPU scrolling ~ <https://wiki.nesdev.org/w/index.php/PPU_scrolling>
-- NMI thread ~ <https://wiki.nesdev.org/w/index.php/NMI_thread>
-- The frame and NMIs ~ <https://wiki.nesdev.org/w/index.php?title=The_frame_and_NMIs>
-
-Misc:
-
-- NES Hardware Specifications ~ <https://problemkaputt.de/everynes.htm#techdata>
-- NES PPU Notes ~ <https://github.com/pjhades/tolarian-academy/blob/master/nes-ppu.md>
-
-#### Code
-
-- Minimal NES example using ca65 ~ <https://github.com/bbbradsmith/NES-ca65-example>
-- NES Programming ~ <https://www.youtube.com/playlist?list=PL29OkqO3wUxyF9BsTAgZkmCEVtC77rgff>
-- smbdis.asm - A comprehensive Super Mario Bros. disassembly ~ <https://gist.github.com/1wert3r/4048722>
-- Disassembly by doppelganger ~ <https://6502disassembly.com/nes-smb/SuperMarioBros.html>
-- SMB Disassembly CC65 ~ <https://github.com/threecreepio/smb-disassembly>
-- ChibiAkumas ~ [6502 Assembly programming for the Nintendo Entertainment System (NES) and Famicom][nesfamicom]
-- ChibiAkumas ~ [Platform Specific Lessons][platform]
-
-Note: ChibiAkumas has lots of other 6502-based platforms resources, and other 8 bit & 16 bit platforms resources.
-
-[nesfamicom]: https://www.chibiakumas.com/6502/nesfamicom.php
-[platform]: https://www.chibiakumas.com/6502/platform5.php
-
-#### Tools
-
-- cc65 Documentation Overview ~ <https://cc65.github.io/doc/>
-- ca65 Users Guide ~ <https://cc65.github.io/doc/ca65.html>
-- FCEUX Help - Debugger ~ <https://fceux.com/web/help/Debugger.html>
-
-#### For future reference
-
-- CHR ROM vs. CHR RAM ~ <https://wiki.nesdev.org/w/index.php?title=CHR_ROM_vs._CHR_RAM#Switching_to_CHR_RAM>
-- UxROM ~ <https://wiki.nesdev.org/w/index.php?title=UxROM>
-- Programming UNROM ~ <https://wiki.nesdev.org/w/index.php?title=Programming_UNROM>
-- MMC1 ~ <https://wiki.nesdev.org/w/index.php?title=MMC1>
-- Programming MMC1 ~ <https://wiki.nesdev.org/w/index.php?title=Programming_MMC1>
